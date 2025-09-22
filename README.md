@@ -1,45 +1,66 @@
-# 📝 **Assignment: Joins and Relationships**
+# FastAPI CRUD Application
 
-## 🎯 **Learning Objectives**
-* ➕ Understand and implement **INNER JOIN**, **LEFT JOIN**, and **RIGHT JOIN** in SQL.
-* 👨‍💻 Retrieve data from multiple related tables using SQL queries.
-* 🔗 Explore relationships between different tables (e.g., employees, products, orders).
-* 💻 Practice real-world SQL scenarios that involve combining tables and retrieving relevant data.
+## Overview
 
----
+A simple FastAPI application to perform CRUD operations on Students and Courses.
 
-## 📋 **What You'll Need**
-* 💻 A computer with internet access.
-* ✍️ A code editor (e.g., Visual Studio Code).
-* 🖥️ MySQL Workbench or another SQL database environment.
+## Setup
 
----
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/kirub21/fastapi-crud-app.git
+   cd fastapi-crud-app
+   ```
 
-## 📝 **Submission Instructions**  
-📂 Write all your SQL queries in the **answers.sql** file.  
-✍️ Answer each question concisely and make sure your queries are clear and correct.  
-🗣️ Structure your responses clearly, and use comments if necessary to explain your approach.
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
----
+3. **Run the application:**
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-## 📚 **Assignment Questions**
+## API Endpoints
 
-### **Question 1 🧑‍💼**  
-**Write an SQL query** to get the **firstName**, **lastName**, **email**, and **officeCode** of all employees.  
-Use an **INNER JOIN** to combine the **employees** table with the **offices** table using the **officeCode** column.
+For full interactive API documentation, visit [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
----
+### Students
 
-### **Question 2 🛍️**  
-**Write an SQL query** to get the **productName**, **productVendor**, and **productLine** from the **products** table.  
-Use a **LEFT JOIN** to combine the **products** table with the **productlines** table using the **productLine** column.
+- `POST /students/` - Create a new student  
+  Request Body:  
+  ```json
+  {
+    "name": "Jane Doe",
+    "email": "jane@example.com"
+  }
+  ```
 
----
+- `GET /students/` - List all students
 
-### **Question 3 📦**  
-**Write an SQL query** to retrieve the **orderDate**, **shippedDate**, **status**, and **customerNumber** for the first 10 orders.  
-Use a **RIGHT JOIN** to combine the **customers** table with the **orders** table using the **customerNumber** column.
+- `GET /students/{student_id}` - Get a student by ID
 
----
+- `DELETE /students/{student_id}` - Delete a student
 
-Good luck 🚀
+### Courses
+
+- `POST /courses/` - Create a new course  
+  Request Body:  
+  ```json
+  {
+    "title": "Math 101",
+    "student_id": 1
+  }
+  ```
+
+- `GET /courses/` - List all courses
+
+- `GET /courses/{course_id}` - Get a course by ID
+
+- `DELETE /courses/{course_id}` - Delete a course
+
+## Database
+
+- Uses SQLite for demonstration (`test.db` will be created in the project root).  
+- You can switch to PostgreSQL or MySQL by changing the `DATABASE_URL` in `app/database.py`.
